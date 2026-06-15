@@ -18,7 +18,7 @@ export default function CitizenPortal() {
         try {
             // Fake hitting route prediction API
             // For now we'll just check live status to inject real context
-            const res = await axios.get('/api/v1/dashboard/live');
+            const res = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/live');
             const liveData = res.data;
             
             const originStatus = liveData.find(z => z.zone_name === formData.origin);

@@ -18,7 +18,7 @@ export default function DigitalTwin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('/api/v1/dashboard/live');
+        const res = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/live');
         setLiveData(res.data);
       } catch (err) {
         console.error(err);
