@@ -8,7 +8,7 @@ import database
 import crud
 import models
 import schemas
-from simulator import generate_simulated_tick, init_db
+from simulator import simulate_data_loop, init_db
 from ai_engine import init_ai_models, predict_congestion, predict_pollution_risk, forecast_energy, predict_waste_risk
 
 @asynccontextmanager
@@ -16,7 +16,10 @@ async def lifespan(app: FastAPI):
     # Startup Events
     init_db()
     init_ai_models()
+    task = asyncio.create_task(simulate_data_loop())
     yield
+    # Shutdown Events
+    task.cancel()
 
 app = FastAPI(title="Smart City Dashboard API", lifespan=lifespan)
 
@@ -34,7 +37,6 @@ def read_root():
 
 @app.get("/api/v1/dashboard/live")
 def get_live_dashboard(db: Session = Depends(database.get_db)):
-    generate_simulated_tick(db)
     # Get latest reading for each zone
     zones = crud.get_zones(db)
     live_data = []

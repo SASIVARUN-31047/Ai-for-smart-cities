@@ -63,3 +63,6 @@ def generate_simulated_tick(db):
         crud.add_sensor_data(db, data)
         
 
+
+        db.close()
+        await asyncio.sleep(15) # Generate data every 15 seconds
