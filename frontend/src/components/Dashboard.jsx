@@ -32,11 +32,6 @@ export default function Dashboard() {
     const interval = setInterval(fetchData, 15000); // Poll every 15 seconds
     return () => clearInterval(interval);
   }, []);
-    
-    fetchData();
-    const interval = setInterval(fetchData, 15000); // Poll every 15 seconds
-    return () => clearInterval(interval);
-  }, []);
 
   // Calculate Aggregates
   const totalVehicles = liveData.reduce((acc, curr) => acc + curr.vehicle_count, 0);
