@@ -23,7 +23,7 @@ def generate_simulated_tick(db):
     global last_tick_time
     current_time = time.time()
     if current_time - last_tick_time < 15:
-    return
+        return
     last_tick_time = current_time
 
     zones = crud.get_zones(db)
