@@ -16,9 +16,9 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         const [liveRes, histRes, recRes] = await Promise.all([
-          axios.get(`${API_BASE}/api/v1/dashboard/live'),
-          axios.get(`${API_BASE}/api/v1/dashboard/history?limit=20'),
-          axios.get(`${API_BASE}/api/v1/recommendations')
+          axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/live`),
+          axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/history?limit=20`),
+          axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/recommendations`)
         ]);
         setLiveData(liveRes.data);
         setHistoryData(histRes.data);
@@ -27,6 +27,11 @@ export default function Dashboard() {
         console.error("Error fetching data:", err);
       }
     };
+
+    fetchData();
+    const interval = setInterval(fetchData, 15000); // Poll every 15 seconds
+    return () => clearInterval(interval);
+  }, []);
     
     fetchData();
     const interval = setInterval(fetchData, 15000); // Poll every 15 seconds
