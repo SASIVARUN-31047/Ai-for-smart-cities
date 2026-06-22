@@ -35,7 +35,7 @@ export default function CitizenPortal() {
                  co2Saved = "2.4 kg";
             } else if (formData.preference === "fastest") {
                  if (originStatus && originStatus.predicted_congestion > 0.6) {
-                     suggestion = `Heavy congestion detected at ${formData.origin}. Rerouting via Highway 20.`;
+                     suggestion = 'Heavy congestion detected at ${formData.origin}. Rerouting via Highway 20.';
                      travelTime = "30 mins";
                  } else {
                      suggestion = "Clear roads ahead. Direct route generated.";
