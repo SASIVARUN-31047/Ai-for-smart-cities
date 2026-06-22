@@ -5,6 +5,7 @@ import {
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend 
 } from 'recharts';
 import { AlertCircle, Car, CloudRain, Zap, Trash2, Activity } from 'lucide-react';
+import { API_BASE } from "../api";
 
 export default function Dashboard() {
   const [liveData, setLiveData] = useState([]);
@@ -15,9 +16,9 @@ export default function Dashboard() {
     const fetchData = async () => {
       try {
         const [liveRes, histRes, recRes] = await Promise.all([
-          axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/live'),
-          axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/history?limit=20'),
-          axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/recommendations')
+          axios.get(`${API_BASE}/api/v1/dashboard/live'),
+          axios.get(`${API_BASE}/api/v1/dashboard/history?limit=20'),
+          axios.get(`${API_BASE}/api/v1/recommendations')
         ]);
         setLiveData(liveRes.data);
         setHistoryData(histRes.data);

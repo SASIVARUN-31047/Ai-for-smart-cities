@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { LocateFixed, Navigation, ShieldCheck, Settings } from 'lucide-react';
+import { API_BASE } from "../api";
 
 export default function CitizenPortal() {
   const [formData, setFormData] = useState({ origin: '', destination: '', preference: 'fastest' });
@@ -18,7 +19,7 @@ export default function CitizenPortal() {
         try {
             // Fake hitting route prediction API
             // For now we'll just check live status to inject real context
-            const res = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/live');
+            const res = await axios.get(`${API_BASE}/api/v1/dashboard/live');
             const liveData = res.data;
             
             const originStatus = liveData.find(z => z.zone_name === formData.origin);

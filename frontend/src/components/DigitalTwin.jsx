@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MapContainer, TileLayer, CircleMarker, Tooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { API_BASE } from "../api";
 
 // Approximate coordinates for a fictional city
 const ZONE_CORDS = {
@@ -18,7 +19,7 @@ export default function DigitalTwin() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/v1/dashboard/live');
+        const res = await axios.get(`${API_BASE}/api/v1/dashboard/live');
         setLiveData(res.data);
       } catch (err) {
         console.error(err);
